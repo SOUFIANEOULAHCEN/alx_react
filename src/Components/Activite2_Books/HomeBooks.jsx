@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 // import FetchData from "../../../services/api";
 import Card from "./Card";
 
 export default function HomeBooks() {
+  const navigate = useNavigate();
   const [Books] = useState([
     {
       id: 1,
@@ -48,6 +50,7 @@ export default function HomeBooks() {
           <Card  value={book} key={book.id} />
         ))}
       </div>
+      <button className="btn btn-warning btn-outline mt-4 w-4/5" onClick={()=>{navigate('/')}}>retour</button>
     </div>
   );
 }
