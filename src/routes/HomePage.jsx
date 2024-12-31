@@ -9,7 +9,9 @@ export default function HomePage() {
       <Link to='/Activite2_Books' className='btn btn-outline btn-lg text-gray-100 mx-2'>
         Activite2 Livres 
       </Link>
-      
+      <Link to='/Activite2_Books_redux' className='btn btn-outline btn-lg text-gray-100 mx-2'>
+        Activite2 Livres redux
+      </Link>
     </div>
   )
 }
