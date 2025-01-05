@@ -19,7 +19,7 @@ export default function CalculPoid() {
   };
   return (
     <div className="h-screen w-full flex flex-row justify-center items-center bg-blue-950 text-gray-100">
-      <div className="p-10 border-2 border-gray-100 rounded-lg w-3/4 h-3/4 bg-gray-100 bg-opacity-10 backdrop-blur-md shadow-lg flex flex-row justify-between items-center">
+      <div className="p-10 border-2 border-gray-100 rounded-lg w-3/4 h-3/4 bg-gray-100 bg-opacity-10 backdrop-blur-md shadow-lg  flex flex-row justify-between items-center">
         {/* Conteneur des inputs */}
         <div className="w-3/4 space-y-6">
           <h1 className="text-4xl font-bold mb-6 text-gray-100 text-center">
