@@ -5,8 +5,12 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addTodo, completTodo } from "./features/ToDoSlice";
 import { v4 as uuidv4 } from "uuid";
+import { useNavigate } from "react-router-dom";
+
 
 export default function ListeToDos() {
+  const navigate = useNavigate();
+
   // state of the input
   const [input, setInput] = useState();
   // const [isCompleted, setIsCompleted] = useState(false);
@@ -34,7 +38,7 @@ export default function ListeToDos() {
   return (
     <div className="h-screen flex flex-col justify-center items-center flex-wrap gap-4 bg-blue-950 text-gray-100">
       <h1 className="text-3xl">To Do App with Redux Toolkit</h1>
-      <div className="lg:w-2/3 h-auto border border-gray-100 bg-gray-100 p-4 rounded-lg shadow-lg bg-opacity-10 backdrop-blur-md">
+      <div className="lg:w-2/3 sm:w-full sm:p-5 h-auto border border-gray-100 bg-gray-100 p-4 rounded-lg shadow-lg bg-opacity-10 backdrop-blur-md">
         <label
           htmlFor=""
           className="flex items-center border border-gray-100 py-2 px-3 rounded-lg bg-gray-100 bg-opacity-20 hover:bg-opacity-30 transition duration-200"
@@ -100,6 +104,14 @@ export default function ListeToDos() {
           </ul>
         </div>
       </div>
+      <button
+          className="btn btn-warning btn-outline mt-4 lg:w-2/3 md:w-2/3 sm:p-5"
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          retour
+        </button>
     </div>
   );
 }
