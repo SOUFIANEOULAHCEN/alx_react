@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function HomePage() {
   return (
-    <div className="h-screen flex justify-center items-center flex-wrap bg-blue-950">
+    <div className="min-h-screen flex flex-col w-max-full overflow-hidden  px-[10%] py-[5%] gap-3 bg-blue-950">
       <Link
         to="/PoidIdeal"
         className="btn btn-outline btn-lg text-gray-100 mx-2"

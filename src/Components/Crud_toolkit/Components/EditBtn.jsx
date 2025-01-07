@@ -1,45 +1,53 @@
-import { Plus, X, User, Mail, Calendar } from "lucide-react";
-import { useRef } from "react";
-import { v4 as uuidv4 } from "uuid";
-import { useDispatch } from "react-redux";
-import { Add } from "../features/CrudSlice";
-export default function AddUser() {
+import { X, User, Mail, Calendar } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Edit } from "../features/CrudSlice";
+export default function EditBtn(props) {
   const dispatch = useDispatch();
-  const nameRef = useRef();
-  const ageRef = useRef();
-  const emailRef = useRef();
+  const usersList = useSelector((state) => state.crud.users);
+  const selectedUser = usersList.find((user) => user.id === props.userId);
+  const [formValues, setFormValues] = useState({
+    userName: "",
+    age: "",
+    email: "",
+    id: "",
+  });
+  const HandleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues((prev) => ({ ...prev, [name]: value }));
+  };
+
   const HandleSubmit = (e) => {
     e.preventDefault();
-    if (
-      nameRef.current.value.trim() !== "" &&
-      ageRef.current.value !== "" &&
-      emailRef.current.value.trim() !== ""
-    ) {
-      const NewUser = {
-        id: uuidv4(),
-        userName: nameRef.current.value.trim(),
-        age: ageRef.current.value,
-        email: emailRef.current.value.trim(),
-      };
-      dispatch(Add(NewUser));
-      e.target.reset();
-      document.getElementById("my_modal_4").close();
-    }
+    // dispatch(Edit({ ...formValues, id: props.userId }));
+    dispatch(Edit(formValues));
+    document.getElementById("my_modal_1").close();
   };
-  return (
-    <div className="w-full mt-1 mb-5 ">
-      <button
-        className="flex items-center gap-2 px-6 py-3 bg-blue-950 text-white rounded-lg hover:bg-blue-800 transition-colors duration-300 shadow-md"
-        onClick={() => document.getElementById("my_modal_4").showModal()}
-      >
-        <Plus size={20} />
-        <span>Add user</span>
-      </button>
 
-      <dialog id="my_modal_4" className="modal">
+  useEffect(() => {
+    // console.log("Selected User ID:", props.userId);
+    // console.log("Selected User:", selectedUser);
+    if (selectedUser) {
+      setFormValues(selectedUser);
+    }
+  }, [selectedUser]);
+  return (
+    <div>
+      <button
+        className="btn btn-outline btn-success text-gray-100"
+        onClick={() => document.getElementById(`edit_modal_${props.userId}`).showModal()}
+      >
+        Edit
+      </button>
+      <dialog
+        id={`edit_modal_${props.userId}`}
+        className="modal"
+        aria-label="Edit user form"
+        role="dialog"
+      >
         <div className="modal-box w-11/12 max-w-2xl rounded-xl shadow-2xl p-6">
           <div className="flex items-center justify-between mb-6">
-            <h3 className="text-2xl font-semibold ">Adding new user</h3>
+            <h3 className="text-2xl font-semibold ">Edit user</h3>
             <form method="dialog">
               <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
                 <X size={24} className="text-gray-500" />
@@ -53,11 +61,13 @@ export default function AddUser() {
                 <User className="text-gray-400" size={20} />
               </div>
               <input
+                onChange={HandleChange}
+                name="userName"
+                value={formValues.userName}
                 type="text"
                 placeholder="Name of user"
                 className="w-full pl-12 pr-4 py-3 text-gray-100 placeholder-gray-400 border border-gray-200 rounded-lg focus:ring-2 focus:ring-gray-200 focus:border-transparent focus:text-gray-100 outline-none transition-all"
                 required
-                ref={nameRef}
               />
             </div>
 
@@ -66,13 +76,15 @@ export default function AddUser() {
                 <Calendar className="text-gray-400" size={20} />
               </div>
               <input
+                onChange={HandleChange}
+                name="age"
                 type="number"
                 placeholder="Age"
                 className="w-full pl-12 pr-4 py-3 text-gray-100 placeholder-gray-400 border border-gray-200 rounded-lg focus:ring-2 focus:ring-gray-200 focus:border-transparent focus:text-gray-100 outline-none transition-all"
                 required
                 min="1"
                 max="100"
-                ref={ageRef}
+                value={formValues.age}
               />
             </div>
 
@@ -81,11 +93,13 @@ export default function AddUser() {
                 <Mail className="text-gray-400" size={20} />
               </div>
               <input
+                onChange={HandleChange}
+                name="email"
                 type="email"
                 placeholder="Email"
                 className="w-full pl-12 pr-4 py-3 text-gray-100 placeholder-gray-400 border border-gray-200 rounded-lg focus:ring-2 focus:ring-gray-200 focus:border-transparent focus:text-gray-100 outline-none transition-all"
                 required
-                ref={emailRef}
+                value={formValues.email}
               />
             </div>
 
@@ -95,11 +109,12 @@ export default function AddUser() {
                   Cancel
                 </button>
               </form>
+
               <button
                 type="submit"
                 className="px-6 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-md"
               >
-                Add
+                Update
               </button>
             </div>
           </form>
