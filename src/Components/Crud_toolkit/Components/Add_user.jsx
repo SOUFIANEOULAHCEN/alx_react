@@ -3,11 +3,13 @@ import { useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useDispatch } from "react-redux";
 import { Add } from "../features/CrudSlice";
+
 export default function AddUser() {
   const dispatch = useDispatch();
   const nameRef = useRef();
   const ageRef = useRef();
   const emailRef = useRef();
+
   const HandleSubmit = (e) => {
     e.preventDefault();
     if (
@@ -26,8 +28,9 @@ export default function AddUser() {
       document.getElementById("my_modal_4").close();
     }
   };
+
   return (
-    <div className="w-full mt-1 mb-5 ">
+    <div className="w-full mt-1 mb-5">
       <button
         className="flex items-center gap-2 px-6 py-3 bg-blue-950 text-white rounded-lg hover:bg-blue-800 transition-colors duration-300 shadow-md"
         onClick={() => document.getElementById("my_modal_4").showModal()}
@@ -37,12 +40,12 @@ export default function AddUser() {
       </button>
 
       <dialog id="my_modal_4" className="modal">
-        <div className="modal-box w-11/12 max-w-2xl rounded-xl shadow-2xl p-6">
+        <div className="modal-box w-11/12 max-w-2xl rounded-xl shadow-2xl p-6 bg-gray-800 text-gray-100">
           <div className="flex items-center justify-between mb-6">
-            <h3 className="text-2xl font-semibold ">Adding new user</h3>
+            <h3 className="text-2xl font-semibold">Adding new user</h3>
             <form method="dialog">
-              <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-                <X size={24} className="text-gray-500" />
+              <button className="p-2 hover:bg-gray-700 rounded-full transition-colors">
+                <X size={24} className="text-gray-100" />
               </button>
             </form>
           </div>
@@ -55,7 +58,7 @@ export default function AddUser() {
               <input
                 type="text"
                 placeholder="Name of user"
-                className="w-full pl-12 pr-4 py-3 text-gray-100 placeholder-gray-400 border border-gray-200 rounded-lg focus:ring-2 focus:ring-gray-200 focus:border-transparent focus:text-gray-100 outline-none transition-all"
+                className="w-full pl-12 pr-4 py-3 bg-gray-700 text-gray-100 placeholder-gray-400 border border-gray-600 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent outline-none transition-all"
                 required
                 ref={nameRef}
               />
@@ -68,7 +71,7 @@ export default function AddUser() {
               <input
                 type="number"
                 placeholder="Age"
-                className="w-full pl-12 pr-4 py-3 text-gray-100 placeholder-gray-400 border border-gray-200 rounded-lg focus:ring-2 focus:ring-gray-200 focus:border-transparent focus:text-gray-100 outline-none transition-all"
+                className="w-full pl-12 pr-4 py-3 bg-gray-700 text-gray-100 placeholder-gray-400 border border-gray-600 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent outline-none transition-all"
                 required
                 min="1"
                 max="100"
@@ -83,7 +86,7 @@ export default function AddUser() {
               <input
                 type="email"
                 placeholder="Email"
-                className="w-full pl-12 pr-4 py-3 text-gray-100 placeholder-gray-400 border border-gray-200 rounded-lg focus:ring-2 focus:ring-gray-200 focus:border-transparent focus:text-gray-100 outline-none transition-all"
+                className="w-full pl-12 pr-4 py-3 bg-gray-700 text-gray-100 placeholder-gray-400 border border-gray-600 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent outline-none transition-all"
                 required
                 ref={emailRef}
               />
@@ -91,7 +94,7 @@ export default function AddUser() {
 
             <div className="flex justify-end gap-3 mt-8">
               <form method="dialog">
-                <button className="px-6 py-2.5 border border-gray-300 text-gray-100 rounded-lg hover:bg-gray-800 transition-colors">
+                <button className="px-6 py-2.5 border border-gray-600 text-gray-100 rounded-lg hover:bg-gray-700 transition-colors">
                   Cancel
                 </button>
               </form>

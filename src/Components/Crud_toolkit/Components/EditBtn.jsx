@@ -2,6 +2,7 @@ import { X, User, Mail, Calendar } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Edit } from "../features/CrudSlice";
+
 export default function EditBtn(props) {
   const dispatch = useDispatch();
   const usersList = useSelector((state) => state.crud.users);
@@ -12,6 +13,7 @@ export default function EditBtn(props) {
     email: "",
     id: "",
   });
+
   const HandleChange = (e) => {
     const { name, value } = e.target;
     setFormValues((prev) => ({ ...prev, [name]: value }));
@@ -19,18 +21,16 @@ export default function EditBtn(props) {
 
   const HandleSubmit = (e) => {
     e.preventDefault();
-    // dispatch(Edit({ ...formValues, id: props.userId }));
     dispatch(Edit(formValues));
-    document.getElementById("my_modal_1").close();
+    document.getElementById(`edit_modal_${props.userId}`).close();
   };
 
   useEffect(() => {
-    // console.log("Selected User ID:", props.userId);
-    // console.log("Selected User:", selectedUser);
     if (selectedUser) {
       setFormValues(selectedUser);
     }
   }, [selectedUser]);
+
   return (
     <div>
       <button
@@ -45,12 +45,12 @@ export default function EditBtn(props) {
         aria-label="Edit user form"
         role="dialog"
       >
-        <div className="modal-box w-11/12 max-w-2xl rounded-xl shadow-2xl p-6">
+        <div className="modal-box w-11/12 max-w-2xl rounded-xl shadow-2xl p-6 bg-gray-800 text-gray-100">
           <div className="flex items-center justify-between mb-6">
-            <h3 className="text-2xl font-semibold ">Edit user</h3>
+            <h3 className="text-2xl font-semibold">Edit user</h3>
             <form method="dialog">
-              <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-                <X size={24} className="text-gray-500" />
+              <button className="p-2 hover:bg-gray-700 rounded-full transition-colors">
+                <X size={24} className="text-gray-100" />
               </button>
             </form>
           </div>
@@ -66,7 +66,7 @@ export default function EditBtn(props) {
                 value={formValues.userName}
                 type="text"
                 placeholder="Name of user"
-                className="w-full pl-12 pr-4 py-3 text-gray-100 placeholder-gray-400 border border-gray-200 rounded-lg focus:ring-2 focus:ring-gray-200 focus:border-transparent focus:text-gray-100 outline-none transition-all"
+                className="w-full pl-12 pr-4 py-3 bg-gray-700 text-gray-100 placeholder-gray-400 border border-gray-600 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent outline-none transition-all"
                 required
               />
             </div>
@@ -80,7 +80,7 @@ export default function EditBtn(props) {
                 name="age"
                 type="number"
                 placeholder="Age"
-                className="w-full pl-12 pr-4 py-3 text-gray-100 placeholder-gray-400 border border-gray-200 rounded-lg focus:ring-2 focus:ring-gray-200 focus:border-transparent focus:text-gray-100 outline-none transition-all"
+                className="w-full pl-12 pr-4 py-3 bg-gray-700 text-gray-100 placeholder-gray-400 border border-gray-600 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent outline-none transition-all"
                 required
                 min="1"
                 max="100"
@@ -97,7 +97,7 @@ export default function EditBtn(props) {
                 name="email"
                 type="email"
                 placeholder="Email"
-                className="w-full pl-12 pr-4 py-3 text-gray-100 placeholder-gray-400 border border-gray-200 rounded-lg focus:ring-2 focus:ring-gray-200 focus:border-transparent focus:text-gray-100 outline-none transition-all"
+                className="w-full pl-12 pr-4 py-3 bg-gray-700 text-gray-100 placeholder-gray-400 border border-gray-600 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent outline-none transition-all"
                 required
                 value={formValues.email}
               />
@@ -105,7 +105,7 @@ export default function EditBtn(props) {
 
             <div className="flex justify-end gap-3 mt-8">
               <form method="dialog">
-                <button className="px-6 py-2.5 border border-gray-300 text-gray-100 rounded-lg hover:bg-gray-800 transition-colors">
+                <button className="px-6 py-2.5 border border-gray-600 text-gray-100 rounded-lg hover:bg-gray-700 transition-colors">
                   Cancel
                 </button>
               </form>
